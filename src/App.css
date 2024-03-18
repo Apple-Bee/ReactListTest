@@ -1,12 +1,43 @@
 body {
-  background-color: #f0f0f0;
+  background-color: #cecdcd43;
   font-family: Arial, sans-serif;
 }
 
 .App {
-  text-align: center;
-  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--dark);
+  color: #EEE;
 }
+
+:root{
+  --dark: #374151;
+  --darker: #1F2937;
+  --darkest: #111827;
+  --gray: #6B7280;
+  --light: #EEE;
+  --pink: #EC4899;
+  --purple: #8B5Cf6;
+}
+
+header{
+  padding: 2rem 1rem;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;    
+}
+
+.add-div{
+  margin-left: 4rem;
+}
+
+.add-div, h1 {
+  margin-left: 5rem;
+}
+
+
+
 
 input[type="text"] {
   padding: 8px;
@@ -37,6 +68,10 @@ button {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  appearance: none;
+  border: none;
+  outline: none;
+  background: none;
 }
 
 #Add-btn{
@@ -74,7 +109,7 @@ button:hover {
 }
 
 .save-button {
-  background-color: #4caf50; /* Green */
+  background-color: #387189; /* Green */
 }
 
 .save-button:hover {

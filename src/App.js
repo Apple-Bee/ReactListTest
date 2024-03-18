@@ -42,8 +42,10 @@ function App() {
 
   return (
     <div className="App">
+    <header>
+    <div className='add-div'>
       <h1>The List</h1>
-      <div>
+      
         <input
           type="text"
           value={inputValue}
@@ -78,6 +80,7 @@ function App() {
           </li>
         ))}
       </ul>
+    </header>
     </div>
   );
 }
