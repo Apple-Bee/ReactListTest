@@ -42,7 +42,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Editable List</h1>
+      <h1>The List</h1>
       <div>
         <input
           type="text"
