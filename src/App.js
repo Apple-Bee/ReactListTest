@@ -11,6 +11,8 @@ function App() {
     if (inputValue.trim() !== '') {
       setItems([...items, inputValue]);
       setInputValue('');
+    } else {
+      alert('Please enter something')
     }
   };
 

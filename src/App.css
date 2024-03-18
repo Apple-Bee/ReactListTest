@@ -10,13 +10,22 @@ body {
 
 input[type="text"] {
   padding: 8px;
+  color: powderblue;
   margin-right: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  outline: none;
+  border: none;
+  border-color: none;
+  background-color: rgb(78, 77, 77);
+  border-radius: 4rem;
 }
 
 ul{
   list-style-type: none;
+}
+
+input[type="text"]:read-only {
+
+  color: rgb(239, 182, 77);
 }
 
 button {
