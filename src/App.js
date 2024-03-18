@@ -32,6 +32,12 @@ function App() {
     setEditIndex(null);
   };
 
+  const handleKeyPress = event => {
+    if (event.key === 'Enter') {
+      addItem();
+    }
+  };
+
   return (
     <div className="App">
       <h1>Editable List</h1>
@@ -40,6 +46,7 @@ function App() {
           type="text"
           value={inputValue}
           onChange={e => setInputValue(e.target.value)}
+          onKeyPress={handleKeyPress}
         />
         <button id='Add-btn' onClick={addItem}>Add</button>
       </div>
