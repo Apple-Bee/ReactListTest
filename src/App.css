@@ -1,38 +1,82 @@
+body {
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+}
+
 .App {
   text-align: center;
+  margin-top: 50px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+input[type="text"] {
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+ul{
+  list-style-type: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+button {
+  padding: 8px 16px;
   color: white;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.App-link {
-  color: #61dafb;
+#Add-btn{
+  padding: 8px 16px;
+  background-color: #45a049;
+  color: rgb(114, 251, 114);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#Save-btn{
+  background-color: #45a049;
 }
+
+#Edit-btn{
+  background-color: #4febd1;
+}
+
+#Delete-btn{
+  background-color: crimson;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.edit-button {
+  background-color: #2196F3; /* Blue */
+}
+
+.edit-button:hover {
+  background-color: #0b7dda;
+}
+
+.save-button {
+  background-color: #4caf50; /* Green */
+}
+
+.save-button:hover {
+  background-color: #45a049;
+}
+
+.delete-button {
+  background-color: #f44336; /* Red */
+}
+
+.delete-button:hover {
+  background-color: #da190b;
+}
+
