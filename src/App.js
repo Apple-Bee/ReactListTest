@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
-import MovieList from './components/ApiRequest';
 
 function App() {
   const [items, setItems] = useState([]);
@@ -15,7 +14,7 @@ function App() {
 
   const fetchItems = async () => {
     try {
-      const response = await axios.get('/api/items');
+      const response = await axios.get('/api/MovieList'); // Update endpoint to match backend
       setItems(response.data);
     } catch (error) {
       console.error('Error fetching items:', error);
@@ -25,7 +24,7 @@ function App() {
   const addItem = async () => {
     if (inputValue.trim() !== '') {
       try {
-        await axios.post('/api/items', { name: inputValue });
+        await axios.post('/api/MovieList', { title: inputValue }); // Update endpoint and data structuregfdfg
         setInputValue('');
         fetchItems();
       } catch (error) {
@@ -36,9 +35,9 @@ function App() {
     }
   };
 
-  const deleteItem = async (index) => {
+  const deleteItem = async (id) => { // Change parameter to id instead of index
     try {
-      await axios.delete(`/api/items/${items[index].id}`);
+      await axios.delete(`/api/MovieList/${id}`); // Update endpoint to delete by id
       fetchItems();
     } catch (error) {
       console.error('Error deleting item:', error);
@@ -50,9 +49,9 @@ function App() {
     setEditValue(value);
   };
 
-  const saveEdit = async () => {
+  const saveEdit = async (id) => { // Change parameter to id instead of index
     try {
-      await axios.put(`/api/items/${items[editIndex].id}`, { name: editValue });
+      await axios.put(`/api/MovieList/${id}`, { title: editValue }); // Update endpoint and data structure
       setEditIndex(null);
       fetchItems();
     } catch (error) {
@@ -82,33 +81,32 @@ function App() {
           </button>
         </div>
         <ul>
-          {items.map((item, index) => (
+          {items.map((item) => ( // Change parameter name from index to item
             <li key={item.id}>
-              {editIndex === index ? (
+              {editIndex === item.id ? (
                 <>
                   <input
                     type="text"
                     value={editValue}
                     onChange={(e) => setEditValue(e.target.value)}
                   />
-                  <button id="Save-btn" onClick={saveEdit}>
+                  <button id="Save-btn" onClick={() => saveEdit(item.id)}> {/* Pass id to saveEdit */}
                     Save
                   </button>
                 </>
               ) : (
                 <>
-                  <input type="text" value={item.name} readOnly />
-                  <button id="Edit-btn" onClick={() => startEdit(index, item.name)}>
+                  <input type="text" value={item.title} readOnly />
+                  <button id="Edit-btn" onClick={() => startEdit(item.id, item.title)}> {/* Pass id to startEdit */}
                     Edit
                   </button>
                 </>
               )}
-              <button id="Delete-btn" onClick={() => deleteItem(index)}>
+              <button id="Delete-btn" onClick={() => deleteItem(item.id)}> {/* Pass id to deleteItem */}
                 Delete
               </button>
             </li>
           ))}
-          <MovieList />
         </ul>
       </header>
     </div>
@@ -116,6 +114,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
