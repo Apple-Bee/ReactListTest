@@ -5,14 +5,17 @@ function MovieList() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/MovieList')
-      .then(response => {
-        setMovies(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching movies:', error);
-      });
+    fetchMovies();
   }, []);
+
+  const fetchMovies = async () => {
+    try {
+      const response = await axios.get('http://localhost:5103/api/movies');
+      setMovies(response.data);
+    } catch (error) {
+      console.error('Error fetching movies:', error);
+    }
+  };
 
   return (
     <div>
@@ -27,3 +30,4 @@ function MovieList() {
 }
 
 export default MovieList;
+
