@@ -39,7 +39,7 @@ function App() {
 
   const deleteItem = async (id) => {
     try {
-      await axios.delete(`/api/MovieList/${id}`);
+      await axios.delete(`/http://localhost:5103/api/movies/${id}`);
       fetchItems();
     } catch (error) {
       console.error('Error deleting item:', error);
