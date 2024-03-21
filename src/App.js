@@ -9,6 +9,7 @@ function App() {
   const [directorValue, setDirectorValue] = useState(''); // State for director name
   const [editIndex, setEditIndex] = useState(null);
   const [editValue, setEditValue] = useState('');
+  const [editDirectorValue, setEditDirectorValue] = useState('');
 
   useEffect(() => {
     fetchItems();
@@ -48,9 +49,10 @@ function App() {
     }
   };
 
-  const startEdit = (index, value) => {
+  const startEdit = (index, title, director) => {
     setEditIndex(index);
-    setEditValue(value);
+    setEditValue(title);
+    setEditDirectorValue(director);
   };
 
   const saveEdit = async (id) => {
@@ -59,10 +61,11 @@ function App() {
       const response = await axios.get(`http://localhost:5103/api/movies/${id}`);
       const existingMovie = response.data;
   
-      // Update only the title
+      // Update only the title and director if they are not empty
       const updatedMovie = {
         ...existingMovie,
-        title: editValue
+        title: editValue !== '' ? editValue : existingMovie.title,
+        director: editDirectorValue !== '' ? editDirectorValue : existingMovie.director,
       };
   
       // Send PUT request with updated movie data
@@ -116,11 +119,13 @@ function App() {
                     type="text"
                     value={editValue}
                     onChange={(e) => setEditValue(e.target.value)}
+                    placeholder="Enter new title"
                   />
                   <input
                     type="text"
-                    value={editValue}
-                    onChange={(e) => setEditValue(e.target.value)}
+                    value={editDirectorValue}
+                    onChange={(e) => setEditDirectorValue(e.target.value)}
+                    placeholder="Enter new director"
                   />
                   <button id="Save-btn" onClick={() => saveEdit(item.id)}>
                     Save
@@ -129,7 +134,7 @@ function App() {
               ) : (
                 <>
                   <input type="text" value={`${item.title} - ${item.director}`} readOnly />
-                  <button id="Edit-btn" onClick={() => startEdit(item.id, item.title)}>
+                  <button id="Edit-btn" onClick={() => startEdit(item.id, item.title, item.director)}>
                     Edit
                   </button>
                 </>
@@ -146,6 +151,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
