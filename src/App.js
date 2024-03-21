@@ -25,7 +25,7 @@ function App() {
   const addItem = async () => {
     if (inputValue.trim() !== '') {
       try {
-        const newItem = { id: items.length + 1, title: inputValue, director: "miss olgert" }; // Generate ID for new item
+        const newItem = { title: inputValue, director: "miss olgert" }; // Generate ID for new item
         await axios.post('http://localhost:5103/api/movies', newItem); // Post new item to backend
         setInputValue('');
         fetchItems();
@@ -39,7 +39,7 @@ function App() {
 
   const deleteItem = async (id) => {
     try {
-      await axios.delete(`/http://localhost:5103/api/movies/${id}`);
+      await axios.delete(`http://localhost:5103/api/movies/${id}`);
       fetchItems();
     } catch (error) {
       console.error('Error deleting item:', error);
@@ -53,13 +53,27 @@ function App() {
 
   const saveEdit = async (id) => {
     try {
-      await axios.put(`/api/MovieList/${id}`, { title: editValue });
+      // Fetch existing movie data
+      const response = await axios.get(`http://localhost:5103/api/movies/${id}`);
+      const existingMovie = response.data;
+  
+      // Update only the title
+      const updatedMovie = {
+        ...existingMovie,
+        title: editValue
+      };
+  
+      // Send PUT request with updated movie data
+      await axios.put(`http://localhost:5103/api/movies/${id}`, updatedMovie);
+  
+      // Reset edit index and fetch updated items
       setEditIndex(null);
       fetchItems();
     } catch (error) {
       console.error('Error updating item:', error);
     }
   };
+  
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
