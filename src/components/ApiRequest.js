@@ -22,7 +22,14 @@ function MovieList() {
       <h1>Movies</h1>
       <ul>
         {movies.map(movie => (
-          <li key={movie.id}>{movie.title}</li>
+          <li key={movie.id}>
+            <div>
+              <strong>Title:</strong> {movie.title}
+            </div>
+            <div>
+              <strong>Director:</strong> {movie.director}
+            </div>
+          </li>
         ))}
       </ul>
     </div>
@@ -30,4 +37,7 @@ function MovieList() {
 }
 
 export default MovieList;
+
+
+
 
