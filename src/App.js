@@ -51,29 +51,29 @@ function App() {
     setEditValue(value);
   };
 
-  const saveEdit = async (id) => {
-    try {
-      // Fetch existing movie data
-      const response = await axios.get(`http://localhost:5103/api/movies/${id}`);
-      const existingMovie = response.data;
-  
-      // Update only the title
-      const updatedMovie = {
-        ...existingMovie,
-        title: editValue
-      };
-  
-      // Send PUT request with updated movie data
-      await axios.put(`http://localhost:5103/api/movies/${id}`, updatedMovie);
-  
-      // Reset edit index and fetch updated items
-      setEditIndex(null);
-      fetchItems();
-    } catch (error) {
-      console.error('Error updating item:', error);
-    }
-  };
-  
+const saveEdit = async (id) => {
+  try {
+    // Fetch existing movie data
+    const response = await axios.get(`http://localhost:5103/api/movies/${id}`);
+    const existingMovie = response.data;
+
+    // Update only the title
+    const updatedMovie = {
+      ...existingMovie,
+      title: editValue
+    };
+
+    // Send PUT request with updated movie data
+    await axios.put(`http://localhost:5103/api/movies/${id}`, updatedMovie);
+
+    // Reset edit index and fetch updated items
+    setEditIndex(null);
+    fetchItems();
+  } catch (error) {
+    console.error('Error updating item:', error);
+  }
+};
+
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
