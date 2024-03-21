@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
-import MovieList from './components/ApiRequest'; // Corrected import statement
+import MovieList from './components/ApiRequest';
+import { useState, useEffect } from 'react'; // Import useState and useEffect hooks
 
 function App() {
   const [items, setItems] = useState([]);
-  const [inputValue, setInputValue] = useState('');
+  const [titleValue, setTitleValue] = useState(''); // State for movie title
+  const [directorValue, setDirectorValue] = useState(''); // State for director name
   const [editIndex, setEditIndex] = useState(null);
   const [editValue, setEditValue] = useState('');
 
@@ -23,17 +24,18 @@ function App() {
   };
 
   const addItem = async () => {
-    if (inputValue.trim() !== '') {
+    if (titleValue.trim() !== '' && directorValue.trim() !== '') { // Check both title and director
       try {
-        const newItem = { title: inputValue, director: "miss olgert" }; // Generate ID for new item
-        await axios.post('http://localhost:5103/api/movies', newItem); // Post new item to backend
-        setInputValue('');
+        const newItem = { title: titleValue, director: directorValue };
+        await axios.post('http://localhost:5103/api/movies', newItem);
+        setTitleValue('');
+        setDirectorValue('');
         fetchItems();
       } catch (error) {
         console.error('Error adding item:', error);
       }
     } else {
-      alert('Please enter something');
+      alert('Please enter both title and director');
     }
   };
 
@@ -53,27 +55,23 @@ function App() {
 
   const saveEdit = async (id) => {
     try {
-      // Fetch existing movie data
       const response = await axios.get(`http://localhost:5103/api/movies/${id}`);
       const existingMovie = response.data;
   
-      // Update only the title
       const updatedMovie = {
         ...existingMovie,
-        title: editValue
+        title: editValue,
+        director: editValue
       };
   
-      // Send PUT request with updated movie data
       await axios.put(`http://localhost:5103/api/movies/${id}`, updatedMovie);
   
-      // Reset edit index and fetch updated items
       setEditIndex(null);
       fetchItems();
     } catch (error) {
       console.error('Error updating item:', error);
     }
   };
-  
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
@@ -88,20 +86,33 @@ function App() {
           <h1>The List</h1>
           <input
             type="text"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            placeholder='Please type movie title'
+            value={titleValue}
+            onChange={(e) => setTitleValue(e.target.value)}
+            onKeyPress={handleKeyPress}
+          />
+          <input 
+            type='text' 
+            placeholder='Please type director name'
+            value={directorValue} // Use directorValue for input value
+            onChange={(e) => setDirectorValue(e.target.value)} // Update directorValue state
             onKeyPress={handleKeyPress}
           />
           <button id="Add-btn" onClick={addItem}>
             Add
           </button>
         </div>
-        <MovieList /> {/* Include MovieList component here */}
+        <MovieList />
         <ul>
           {items.map((item) => (
             <li key={item.id}>
               {editIndex === item.id ? (
                 <>
+                  <input
+                    type="text"
+                    value={editValue}
+                    onChange={(e) => setEditValue(e.target.value)}
+                  />
                   <input
                     type="text"
                     value={editValue}
@@ -113,7 +124,7 @@ function App() {
                 </>
               ) : (
                 <>
-                  <input type="text" value={item.title} readOnly />
+                  <input type="text" value={`${item.title} - ${item.director}`} readOnly />
                   <button id="Edit-btn" onClick={() => startEdit(item.id, item.title)}>
                     Edit
                   </button>
@@ -131,6 +142,8 @@ function App() {
 }
 
 export default App;
+
+
 
 
 
