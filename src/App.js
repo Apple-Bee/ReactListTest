@@ -110,8 +110,10 @@ function App() {
           </button>
         </div>
         <MovieList />
-        <ul>
+        
+        <ul className='ul-edit-delete'>
           {items.map((item) => (
+            
             <li key={item.id}>
               {editIndex === item.id ? (
                 <>
@@ -131,6 +133,7 @@ function App() {
                     Save
                   </button>
                 </>
+                
               ) : (
                 <>
                   <input type="text" value={`${item.title} - ${item.director}`} readOnly />

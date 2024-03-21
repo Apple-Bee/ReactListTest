@@ -3,6 +3,7 @@ import axios from 'axios';
 
 function MovieList() {
   const [movies, setMovies] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     fetchMovies();
@@ -17,26 +18,33 @@ function MovieList() {
     }
   };
 
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <div>
-      <h1>Movies</h1>
-      <ul>
-        {movies.map(movie => (
-          <li key={movie.id}>
-            <div>
-              <strong>Title:</strong> {movie.title}
-            </div>
-            <div>
-              <strong>Director:</strong> {movie.director}
-            </div>
-          </li>
-        ))}
-      </ul>
+    <div className="movie-container">
+      <h1 className="movie-heading" onClick={toggleDropdown}>Movies From Database</h1>
+      {isOpen && (
+        <ul className="movie-list">
+          {movies.map(movie => (
+            <li key={movie.id} className="movie-item">
+              <div className="movie-title">
+                <strong>Title:</strong> {movie.title}
+              </div>
+              <div className="movie-director">
+                <strong>Director:</strong> {movie.director}
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
 
 export default MovieList;
+
 
 
 

@@ -124,3 +124,80 @@ button:hover {
   background-color: #da190b;
 }
 
+/* Style for the container db stored movies */
+.movie-container {
+  display: flex;
+  margin-left: 20rem;
+  margin: 20px;
+}
+
+/* Style for the heading */
+.movie-heading h1 {
+  display: flex;
+  font-size: 24px;
+  margin-bottom: 10px;
+  margin-left: 20rem;
+}
+
+/* Style for each movie item */
+/* Style for the container */
+/* Style for the container */
+.movie-container {
+  display: auto;
+  margin: 20px;
+  position: relative; /* Add position relative */
+  
+}
+
+/* Style for the heading */
+.movie-heading {
+  font-size: 24px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  margin-left: 30rem;
+}
+
+/* Style for the movie list */
+.movie-list {
+  display: auto;
+  list-style: auto;
+  padding: 0;
+  position: absolute; /* Position the list absolutely */
+  top: 40px; /* Adjust top position to make space for the heading */
+  left: 30rem;
+  width: auto; /* Make the list full width */
+}
+
+/* Style for each movie item */
+.movie-item {
+  display: auto;
+  background-color: #6e6b6b;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  
+}
+
+/* Style for movie title */
+.movie-title {
+  font-weight: bold;
+}
+
+/* Style for movie director */
+.movie-director {
+  margin-top: 5px;
+}
+
+/* Style for even numbered movie items */
+.movie-item:nth-child(even) {
+  background-color: #6e6b6b;
+}
+
+.ul-edit-delete {
+  display: inline-table;
+  margin-left: 2rem;
+}
+
+
+
+
