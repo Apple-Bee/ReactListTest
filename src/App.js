@@ -90,7 +90,7 @@ function App() {
     <div className="App">
       <header>
         <div className="add-div">
-          <h1>The List</h1>
+          <h1>The movie list</h1>
           <input
             type="text"
             placeholder='Please type movie title'
